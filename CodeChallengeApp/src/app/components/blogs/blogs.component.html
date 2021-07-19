@@ -1,0 +1,69 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="text-center">Posts</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="text-center">{{action | uppercase}} Blog</h5>
+                    <form [formGroup]="form" (ngSubmit)="saveBlog()">
+                        <div class="row">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="inputGroup-sizing-default"
+                                    [class.green-icon]="this.form.get('title')?.valid"
+                                    [class.red-icon]="!this.form.get('title')?.valid && this.form.get('title')?.touched">Title</span>
+                                <input formControlName="title" type="text" class="form-control"
+                                    aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlTextarea1" class="form-label">Add Content</label>
+                                <textarea formControlName="content" class="form-control"
+                                    id="exampleFormControlTextarea1" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button class="btn btn-xs btn-outline-danger" type="reset"><i
+                                    class="far fa-window-close"></i> Cancel</button>
+
+                            <button [disabled]="this.form.invalid" type="submit"
+                                class="btn btn-xs btn-outline-success"><i class="far fa-save"></i> Add</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="search-results" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+                (scrolled)="onScroll()">
+                <div class="col-md-4 p-2" *ngFor="let blog of listBlogs; let i=index">
+                    <div class="card" style="width: 18rem;">
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{blog.title}}</h5>
+                            <p class="card-text">{{blog.content}}</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                        <div class="card-footer text-right">
+                            <i class="far fa-edit text-info" (click)="editBlog(blog)"></i>
+                            <i class="far fa-trash-alt text-danger" (click)="deleteBlog(blog.id)"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row pb-5">
+                <div class="col-md-2 p-5">
+                    <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+                        <p style="font-size: 20px; color: white">Loading...</p>
+                    </ngx-spinner>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
