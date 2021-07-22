@@ -27,7 +27,7 @@ namespace WebApi.Controllers
         {
             pageIndex = pageIndex <= 0 ? 1 : pageIndex;
             pageSize = pageSize > maxPageSize ? maxPageSize : (pageSize <= 0) ? 5 : pageSize;
-            var spec = new BlogSpecification(pageSize,pageIndex);
+            var spec = new BlogSpecification(pageSize, pageIndex);
             var blogs = await _blogRepository.GetAllWithSpec(spec);
             var specCount = new BlogForCountingSpecification();
             var totalBlogs = await _blogRepository.CountAsync(specCount);
@@ -50,6 +50,31 @@ namespace WebApi.Controllers
             var spec = new BlogSpecification(id);
             var blog = await _blogRepository.GetByIdWithSpec(spec);
             return _mapper.Map<Blog, BlogDto>(blog);
+        }
+        [HttpPost]
+        public async Task<ActionResult<Blog>> Post(Blog blog)
+        {
+            var result = await _blogRepository.Add(blog);
+            if (result == 0)
+            {
+                throw new Exception("Blog not added");
+
+            }
+            else
+                return Ok(blog);
+        }
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Blog>> Put(int id,Blog blog)
+        {
+            blog.Id = id;
+            var result = await _blogRepository.Update(blog);
+            if (result == 0)
+            {
+                throw new Exception("Blog not updated");
+
+            }
+            else
+                return Ok(blog);
         }
     }
 }
