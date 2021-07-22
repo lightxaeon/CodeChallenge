@@ -24,9 +24,15 @@ namespace WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper(typeof(MappingProfiles));
-            services.AddTransient<IBlogRepository, BlogRepository>();
-            services.AddControllers();
             services.AddDbContext<CodeChallengeDBContext>(opt => { opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")); });
+
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddTransient<IBlogRepository, BlogRepository>();
+
+            services.AddControllers(); services.AddCors(opt =>
+            {
+                opt.AddPolicy("AllowWebApi", rule => { rule.AllowAnyHeader().AllowAnyMethod().WithOrigins("*"); });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,8 +42,8 @@ namespace WebApi
             {
                 app.UseDeveloperExceptionPage();
             }
-
             app.UseRouting();
+            app.UseCors("AllowWebApi");
 
             app.UseAuthorization();
 

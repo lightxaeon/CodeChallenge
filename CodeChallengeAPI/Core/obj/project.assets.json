@@ -8,19 +8,23 @@
     "net5.0": []
   },
   "packageFolders": {
-    "C:\\Users\\BLACK-PC\\.nuget\\packages\\": {}
+    "C:\\Users\\IT-Desarrollo\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\CodeChallenge\\CodeChallengeAPI\\Core\\Core.csproj",
+      "projectUniqueName": "D:\\git\\CodeChallenge\\CodeChallengeAPI\\Core\\Core.csproj",
       "projectName": "Core",
-      "projectPath": "F:\\CodeChallenge\\CodeChallengeAPI\\Core\\Core.csproj",
-      "packagesPath": "C:\\Users\\BLACK-PC\\.nuget\\packages\\",
-      "outputPath": "F:\\CodeChallenge\\CodeChallengeAPI\\Core\\obj\\",
+      "projectPath": "D:\\git\\CodeChallenge\\CodeChallengeAPI\\Core\\Core.csproj",
+      "packagesPath": "C:\\Users\\IT-Desarrollo\\.nuget\\packages\\",
+      "outputPath": "D:\\git\\CodeChallenge\\CodeChallengeAPI\\Core\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\BLACK-PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\IT-Desarrollo\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

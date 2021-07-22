@@ -10,3 +10,15 @@ F:\CodeChallenge\CodeChallengeAPI\Core\obj\Debug\net5.0\Core.dll
 F:\CodeChallenge\CodeChallengeAPI\Core\obj\Debug\net5.0\ref\Core.dll
 F:\CodeChallenge\CodeChallengeAPI\Core\obj\Debug\net5.0\Core.pdb
 F:\CodeChallenge\CodeChallengeAPI\Core\obj\Debug\net5.0\Core.csproj.AssemblyReference.cache
+D:\git\CodeChallenge\CodeChallengeAPI\Core\bin\Debug\net5.0\Core.deps.json
+D:\git\CodeChallenge\CodeChallengeAPI\Core\bin\Debug\net5.0\Core.dll
+D:\git\CodeChallenge\CodeChallengeAPI\Core\bin\Debug\net5.0\ref\Core.dll
+D:\git\CodeChallenge\CodeChallengeAPI\Core\bin\Debug\net5.0\Core.pdb
+D:\git\CodeChallenge\CodeChallengeAPI\Core\obj\Debug\net5.0\Core.csproj.AssemblyReference.cache
+D:\git\CodeChallenge\CodeChallengeAPI\Core\obj\Debug\net5.0\Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\git\CodeChallenge\CodeChallengeAPI\Core\obj\Debug\net5.0\Core.AssemblyInfoInputs.cache
+D:\git\CodeChallenge\CodeChallengeAPI\Core\obj\Debug\net5.0\Core.AssemblyInfo.cs
+D:\git\CodeChallenge\CodeChallengeAPI\Core\obj\Debug\net5.0\Core.csproj.CoreCompileInputs.cache
+D:\git\CodeChallenge\CodeChallengeAPI\Core\obj\Debug\net5.0\Core.dll
+D:\git\CodeChallenge\CodeChallengeAPI\Core\obj\Debug\net5.0\ref\Core.dll
+D:\git\CodeChallenge\CodeChallengeAPI\Core\obj\Debug\net5.0\Core.pdb

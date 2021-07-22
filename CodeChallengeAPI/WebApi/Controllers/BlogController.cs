@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
+using Core.Specifications;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebApi.DTOs;
@@ -12,26 +14,41 @@ namespace WebApi.Controllers
     [ApiController]
     public class BlogController : ControllerBase
     {
-        private readonly IBlogRepository _blogRepository;
+        private readonly IGenericRepository<Blog> _blogRepository;
         private readonly IMapper _mapper;
         private const int maxPageSize = 20;
-        public BlogController(IBlogRepository blogRepository, IMapper mapper)
+        public BlogController(IGenericRepository<Blog> blogRepository, IMapper mapper)
         {
             _blogRepository = blogRepository;
             _mapper = mapper;
         }
         [HttpGet]
-        public async Task<ActionResult<List<Blog>>> GetBlogs([FromQuery] int? pageIndex, [FromQuery] int? pageSize)
+        public async Task<ActionResult<Pagination<BlogDto>>> GetBlogs([FromQuery] int pageIndex, [FromQuery] int pageSize)
         {
-            pageIndex = pageIndex == null ? 1 : pageIndex;
-            pageSize = pageSize > maxPageSize ? maxPageSize : (pageSize == null) ? 5 : pageSize;
-            var blogs = await _blogRepository.GetBlogsAsync();
-            return Ok(_mapper.Map<IReadOnlyList<Blog>, IReadOnlyList<BlogDto>>(blogs));
+            pageIndex = pageIndex <= 0 ? 1 : pageIndex;
+            pageSize = pageSize > maxPageSize ? maxPageSize : (pageSize <= 0) ? 5 : pageSize;
+            var spec = new BlogSpecification(pageSize,pageIndex);
+            var blogs = await _blogRepository.GetAllWithSpec(spec);
+            var specCount = new BlogForCountingSpecification();
+            var totalBlogs = await _blogRepository.CountAsync(specCount);
+            var rounded = Math.Ceiling(Convert.ToDecimal(totalBlogs / pageSize));
+            var totalPages = Convert.ToInt32(rounded);
+
+            var data = _mapper.Map<IReadOnlyList<Blog>, IReadOnlyList<BlogDto>>(blogs);
+            return Ok(new Pagination<BlogDto>
+            {
+                Count = totalBlogs,
+                Data = data,
+                PageCount = totalPages,
+                PageIndex = pageIndex,
+                PageSize = pageSize
+            });
         }
         [HttpGet("{id}")]
         public async Task<ActionResult<BlogDto>> GetBlogs(int id)
         {
-            var blog = await _blogRepository.GetBlogByIdAsync(id);
+            var spec = new BlogSpecification(id);
+            var blog = await _blogRepository.GetByIdWithSpec(spec);
             return _mapper.Map<Blog, BlogDto>(blog);
         }
     }
