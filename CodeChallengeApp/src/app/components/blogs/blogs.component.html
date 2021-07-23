@@ -12,12 +12,12 @@
         <div class="col-lg-6">
             <pagination-controls previousLabel="Prev" nextLabel="Next" [responsive]="true"
                 (pageChange)="handlePageChange($event)"></pagination-controls>
-            <div class="col-md-4 p-2" *ngFor="let blog of listBlogs | paginate :
+            <div class="col-md-12 p-2" *ngFor="let blog of listBlogs | paginate :
             { itemsPerPage: pageSize,
                 currentPage: page,
                 totalItems: count
           }; let i = index">
-                <div class="card" style="width: 18rem;">
+                <div class="card" >
                     <div class="card-body">
                         <h5 class="card-title">{{blog.title}}</h5>
                         <p class="card-text">{{blog.content}}</p>
