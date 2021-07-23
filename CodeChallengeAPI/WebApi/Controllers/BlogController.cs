@@ -26,7 +26,7 @@ namespace WebApi.Controllers
         public async Task<ActionResult<Pagination<BlogDto>>> GetBlogs([FromQuery] int pageIndex, [FromQuery] int pageSize)
         {
             pageIndex = pageIndex <= 0 ? 1 : pageIndex;
-            pageSize = pageSize > maxPageSize ? maxPageSize : (pageSize <= 0) ? 5 : pageSize;
+            pageSize = pageSize > maxPageSize ? maxPageSize : (pageSize <= 0) ? 50 : pageSize;
             var spec = new BlogSpecification(pageSize, pageIndex);
             var blogs = await _blogRepository.GetAllWithSpec(spec);
             var specCount = new BlogForCountingSpecification();
@@ -68,6 +68,19 @@ namespace WebApi.Controllers
         {
             blog.Id = id;
             var result = await _blogRepository.Update(blog);
+            if (result == 0)
+            {
+                throw new Exception("Blog not updated");
+
+            }
+            else
+                return Ok(blog);
+        }
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Blog>> Delete(int id, Blog blog)
+        {
+            blog.Id = id;
+            var result = await _blogRepository.Delete(blog);
             if (result == 0)
             {
                 throw new Exception("Blog not updated");

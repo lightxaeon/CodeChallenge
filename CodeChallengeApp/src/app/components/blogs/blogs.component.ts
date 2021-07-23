@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { BlogService } from 'src/app/services/blog.service';
 
@@ -14,11 +13,13 @@ export class BlogsComponent implements OnInit {
   action = 'Add';
   form: FormGroup;
   id: number | undefined;
-  notEmptyPost = true;
-  notScrolly = true;
+  page = 1;
+  count = 0;
+  pageSize = 3;
+  pageSizes = [3, 6, 9, 12];
   constructor(private fb: FormBuilder,
     private toastr: ToastrService,
-    private _blogService: BlogService,private spiner:NgxSpinnerService) {
+    private _blogService: BlogService) {
     this.form = this.fb.group({
       title: ['', Validators.required],
       content: ['']
@@ -28,20 +29,29 @@ export class BlogsComponent implements OnInit {
   ngOnInit(): void {
     this.getBlogs();
   }
+  getRequestParams(page: number, pageSize: number): any {
+    let params: any = {};
+
+    if (page) {
+      params[`page`] = page - 1;
+    }
+
+    if (pageSize) {
+      params[`size`] = pageSize;
+    }
+
+    return params;
+  }
   getBlogs() {
-    this._blogService.getListBlogs().subscribe(data => {
-      this.listBlogs = data;
+    const params = this.getRequestParams(this.page, this.pageSize);
+
+    this._blogService.getListBlogs(params).subscribe(response => {
+      this.listBlogs = response.data;
+      this.count = response.count;
     },
       error => { console.log(error); });
   }
   saveBlog() {
-    // const blog: any = {
-    //   title: this.form.get('title')?.value,
-    //   content: this.form.get('content')?.value
-    // }
-    // this.listBlogs.push(blog);
-    // this.toastr.success('Your blog was submitted!', 'Blog posted!');
-    // this.form.reset();
     const blog: any = {
       title: this.form.get('title')?.value,
       content: this.form.get('content')?.value
@@ -56,8 +66,7 @@ export class BlogsComponent implements OnInit {
 
     }
     else {
-      console
-      blog.id=this.id;
+      blog.id = this.id;
       this._blogService.editBlog(this.id, blog).subscribe(data => {
 
         this.id = undefined;
@@ -66,12 +75,10 @@ export class BlogsComponent implements OnInit {
         this.form.reset();
 
       });
-      this.action = "Add"; 
+      this.action = "Add";
     }
   }
   deleteBlog(index: number) {
-    // this.listBlogs.splice(index,1);   
-    //this.toastr.error('Your blog was deleted!', 'Blog deleted!');
     this._blogService.deleteBlog(index).subscribe(data => {
       this.toastr.error('Your blog was deleted!', 'Blog deleted!');
       this.getBlogs();
@@ -85,19 +92,15 @@ export class BlogsComponent implements OnInit {
       content: blog.content,
     })
   }
-  onScroll(){
-    if(this.notScrolly && this.notEmptyPost ){
 
-      this.spiner.show();
-      this.notScrolly=false;
-      this.loadNext();
-    }
+  handlePageChange(event: number): void {
+    this.page = event;
+    this.getBlogs();
   }
-  loadNext(){
- setTimeout(() => {
-  this.notScrolly=true;
-   
-  this.spiner.hide();
- }, 1000);
+
+  handlePageSizeChange(event: any): void {
+    this.pageSize = event.target.value;
+    this.page = 1;
+    this.getBlogs();
   }
 }

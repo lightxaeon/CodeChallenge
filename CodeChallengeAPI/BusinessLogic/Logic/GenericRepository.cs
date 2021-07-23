@@ -58,5 +58,10 @@ namespace BusinessLogic.Logic
             _context.Entry(entity).State = EntityState.Modified;
             return await _context.SaveChangesAsync();
         }
+        public async Task<int> Delete(T entity)
+        {
+            _context.Set<T>().Remove(entity);
+            return await _context.SaveChangesAsync();
+        }
     }
 }

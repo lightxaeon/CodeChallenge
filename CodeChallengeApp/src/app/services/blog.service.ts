@@ -6,12 +6,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class BlogService {
-  private myAppUrl = "https://localhost:44350/";
+  private myAppUrl = "http://localhost:42399/";
   private myApiUrl= "api/blog/";
   constructor(private http: HttpClient) { }
 
-  getListBlogs(): Observable<any> {
-    return this.http.get(this.myAppUrl + this.myApiUrl);
+  getListBlogs(params: any): Observable<any> {
+    return this.http.get(this.myAppUrl + this.myApiUrl,{params});
 
   }
   deleteBlog(id:number): Observable<any> {

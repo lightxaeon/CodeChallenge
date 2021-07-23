@@ -5969,23 +5969,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\IT-Desarrollo\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\BLACK-PC\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\git\\CodeChallenge\\CodeChallengeAPI\\BusinessLogic\\BusinessLogic.csproj",
+      "projectUniqueName": "F:\\CodeChallenge\\CodeChallengeAPI\\BusinessLogic\\BusinessLogic.csproj",
       "projectName": "BusinessLogic",
-      "projectPath": "D:\\git\\CodeChallenge\\CodeChallengeAPI\\BusinessLogic\\BusinessLogic.csproj",
-      "packagesPath": "C:\\Users\\IT-Desarrollo\\.nuget\\packages\\",
-      "outputPath": "D:\\git\\CodeChallenge\\CodeChallengeAPI\\BusinessLogic\\obj\\",
+      "projectPath": "F:\\CodeChallenge\\CodeChallengeAPI\\BusinessLogic\\BusinessLogic.csproj",
+      "packagesPath": "C:\\Users\\BLACK-PC\\.nuget\\packages\\",
+      "outputPath": "F:\\CodeChallenge\\CodeChallengeAPI\\BusinessLogic\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\IT-Desarrollo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\BLACK-PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5999,8 +5995,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "D:\\git\\CodeChallenge\\CodeChallengeAPI\\Core\\Core.csproj": {
-              "projectPath": "D:\\git\\CodeChallenge\\CodeChallengeAPI\\Core\\Core.csproj"
+            "F:\\CodeChallenge\\CodeChallengeAPI\\Core\\Core.csproj": {
+              "projectPath": "F:\\CodeChallenge\\CodeChallengeAPI\\Core\\Core.csproj"
             }
           }
         }
